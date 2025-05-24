@@ -1444,6 +1444,64 @@ namespace Microsoft.Xna.Framework
 			}
 		}
 
+		public static IntPtr CreateSystemCursor(SystemCursor cursor)
+		{
+			return cursor switch
+			{
+				SystemCursor.Arrow => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_ARROW),
+				SystemCursor.IBeam => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_IBEAM),
+				SystemCursor.Wait => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_WAIT),
+				SystemCursor.Crosshair => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_CROSSHAIR),
+				SystemCursor.WaitArrow => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_WAITARROW),
+				SystemCursor.SizeNWSE => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZENWSE),
+				SystemCursor.SizeNESW => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZENWSE),
+				SystemCursor.SizeWE => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZEWE),
+				SystemCursor.SizeNS => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZENS),
+				SystemCursor.SizeAll => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZEALL),
+				SystemCursor.No => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_NO),
+				SystemCursor.Hand => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_HAND),
+				_ => SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_ARROW)
+			};
+		}
+
+		public static IntPtr MouseCursorFromTexture2D(Texture2D texture, int originx, int originy)
+		{
+			IntPtr surface = IntPtr.Zero;
+			IntPtr handle = IntPtr.Zero;
+			try
+			{
+				var bytes = new byte[texture.Width * texture.Height * 4];
+				texture.GetData(bytes);
+				var textureHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
+				try
+				{
+					surface = SDL.SDL_CreateRGBSurfaceFrom(textureHandle.AddrOfPinnedObject(), texture.Width, texture.Height, 32, texture.Width * 4, 0x000000ff, 0x0000FF00, 0x00FF0000, 0xFF000000);
+				}
+				finally
+				{
+					textureHandle.Free();
+				}
+
+				if (surface == IntPtr.Zero)
+					throw new InvalidOperationException("Failed to create surface for mouse cursor: " + SDL.SDL_GetError());
+
+				handle = SDL.SDL_CreateColorCursor(surface, originx, originy);
+				if (handle == IntPtr.Zero)
+					throw new InvalidOperationException("Failed to set surface for mouse cursor: " + SDL.SDL_GetError());
+			}
+			finally
+			{
+				if (surface != IntPtr.Zero)
+					SDL.SDL_FreeSurface(surface);
+			}
+
+			return handle;
+		}
+		public static void SetCursor(IntPtr handle)
+		{
+			SDL.SDL_SetCursor(handle);
+		}
+
 		#endregion
 
 		#region Storage Methods

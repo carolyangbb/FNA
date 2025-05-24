@@ -291,6 +291,7 @@
 		<Compile Include="src\Input\Keys.cs" />
 		<Compile Include="src\Input\KeyState.cs" />
 		<Compile Include="src\Input\Mouse.cs" />
+		<Compile Include="src\Input\MouseCursor.cs" />
 		<Compile Include="src\Input\MouseState.cs" />
 		<Compile Include="src\Input\TextInputEXT.cs" />
 		<Compile Include="src\Input\Touch\GestureDetector.cs" />

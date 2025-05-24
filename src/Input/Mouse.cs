@@ -116,6 +116,15 @@ namespace Microsoft.Xna.Framework.Input
 			FNAPlatform.SetMousePosition(WindowHandle, x, y);
 		}
 
+		/// <summary>
+		/// Sets the cursor image to the specified MouseCursor.
+		/// </summary>
+		/// <param name="cursor">Mouse cursor to use for the cursor image.</param>
+		public static void SetCursor(MouseCursor cursor)
+		{
+			FNAPlatform.SetCursor(cursor.Handle);
+		}
+
 		#endregion
 
 		#region Internal Methods

@@ -1664,8 +1664,12 @@ namespace Microsoft.Xna.Framework
 		#endregion
 
 		#region Private Constructors
-
-		private Color(uint packedValue)
+		/// <summary>
+		/// Constructs an RGBA color from a packed value.
+		/// The value is a 32-bit unsigned integer, with R in the least significant octet.
+		/// </summary>
+		/// <param name="packedValue">The packed value.</param>
+		public Color(uint packedValue)
 		{
 			this.packedValue = packedValue;
 		}

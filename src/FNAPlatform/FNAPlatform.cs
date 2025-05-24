@@ -160,6 +160,10 @@ namespace Microsoft.Xna.Framework
 				SupportsOrientationChanges =	SDL3_FNAPlatform.SupportsOrientationChanges;
 				NeedsPlatformMainLoop = 	SDL3_FNAPlatform.NeedsPlatformMainLoop;
 				RunPlatformMainLoop =		SDL3_FNAPlatform.RunPlatformMainLoop;
+
+				CreateSystemCursor = SDL3_FNAPlatform.CreateSystemCursor;
+				MouseCursorFromTexture2D = SDL3_FNAPlatform.MouseCursorFromTexture2D;
+				SetCursor = SDL3_FNAPlatform.SetCursor;
 			}
 			else
 			{
@@ -215,6 +219,10 @@ namespace Microsoft.Xna.Framework
 				SupportsOrientationChanges =	SDL2_FNAPlatform.SupportsOrientationChanges;
 				NeedsPlatformMainLoop = 	SDL2_FNAPlatform.NeedsPlatformMainLoop;
 				RunPlatformMainLoop =		SDL2_FNAPlatform.RunPlatformMainLoop;
+
+				CreateSystemCursor = SDL2_FNAPlatform.CreateSystemCursor;
+				MouseCursorFromTexture2D = SDL2_FNAPlatform.MouseCursorFromTexture2D;
+				SetCursor = SDL2_FNAPlatform.SetCursor;
 			}
 
 			FNALoggerEXT.Initialize();
@@ -470,6 +478,15 @@ namespace Microsoft.Xna.Framework
 
 		public delegate void RunPlatformMainLoopFunc(Game game);
 		public static readonly RunPlatformMainLoopFunc RunPlatformMainLoop;
+
+		public delegate IntPtr CreateSystemCursorFunc(SystemCursor cursor);
+		public static readonly CreateSystemCursorFunc CreateSystemCursor;
+
+		public delegate IntPtr MouseCursorFromTexture2DFunc(Texture2D texture, int originx, int originy);
+		public static readonly MouseCursorFromTexture2DFunc MouseCursorFromTexture2D;
+
+		public delegate void SetCursorFunc(IntPtr handle);
+		public static readonly SetCursorFunc SetCursor;
 
 		#endregion
 	}

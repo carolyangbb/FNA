@@ -92,6 +92,22 @@ namespace Microsoft.Xna.Framework
 		}
 
 		/// <summary>
+		/// The width-height coordinates of this <see cref="Rectangle"/>.
+		/// </summary>
+		public Point Size
+		{
+			get
+			{
+				return new Point(this.Width, this.Height);
+			}
+			set
+			{
+				Width = value.X;
+				Height = value.Y;
+			}
+		}
+
+		/// <summary>
 		/// A <see cref="Point"/> located in the center of this <see cref="Rectangle"/>'s bounds.
 		/// </summary>
 		/// <remarks>
@@ -204,6 +220,20 @@ namespace Microsoft.Xna.Framework
 			Y = y;
 			Width = width;
 			Height = height;
+		}
+
+		/// <summary>
+		/// Creates a new instance of <see cref="Rectangle"/> struct, with the specified
+		/// location and size.
+		/// </summary>
+		/// <param name="location">The x and y coordinates of the top-left corner of the created <see cref="Rectangle"/>.</param>
+		/// <param name="size">The width and height of the created <see cref="Rectangle"/>.</param>
+		public Rectangle(Point location, Point size)
+		{
+			this.X = location.X;
+			this.Y = location.Y;
+			this.Width = size.X;
+			this.Height = size.Y;
 		}
 
 		#endregion
