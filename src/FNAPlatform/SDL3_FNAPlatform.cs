@@ -1438,6 +1438,12 @@ namespace Microsoft.Xna.Framework
 		{
 			SDL.SDL_SetCursor(handle);
 		}
+
+		public static IntPtr GetCursor()
+		{
+			return SDL.SDL_GetCursor();
+		}
+
 		#endregion
 
 		#region Storage Methods

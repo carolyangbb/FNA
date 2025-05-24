@@ -38,6 +38,12 @@ namespace Microsoft.Xna.Framework.Input
 			}
 		}
 
+		public static bool IsDefaultCursor
+		{
+			get;
+			set;
+		}
+
 		#endregion
 
 		#region Internal Variables
@@ -123,6 +129,16 @@ namespace Microsoft.Xna.Framework.Input
 		public static void SetCursor(MouseCursor cursor)
 		{
 			FNAPlatform.SetCursor(cursor.Handle);
+
+			IsDefaultCursor = cursor == MouseCursor.Arrow;
+		}
+
+		/// <summary>
+		/// Get the cursor image to the specified MouseCursor.
+		/// </summary>
+		public static IntPtr GetCursor()
+		{
+			return FNAPlatform.GetCursor();
 		}
 
 		#endregion

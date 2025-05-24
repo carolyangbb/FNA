@@ -164,6 +164,7 @@ namespace Microsoft.Xna.Framework
 				CreateSystemCursor = SDL3_FNAPlatform.CreateSystemCursor;
 				MouseCursorFromTexture2D = SDL3_FNAPlatform.MouseCursorFromTexture2D;
 				SetCursor = SDL3_FNAPlatform.SetCursor;
+				GetCursor = SDL3_FNAPlatform.GetCursor;
 			}
 			else
 			{
@@ -223,6 +224,7 @@ namespace Microsoft.Xna.Framework
 				CreateSystemCursor = SDL2_FNAPlatform.CreateSystemCursor;
 				MouseCursorFromTexture2D = SDL2_FNAPlatform.MouseCursorFromTexture2D;
 				SetCursor = SDL2_FNAPlatform.SetCursor;
+				GetCursor = SDL2_FNAPlatform.GetCursor;
 			}
 
 			FNALoggerEXT.Initialize();
@@ -487,6 +489,9 @@ namespace Microsoft.Xna.Framework
 
 		public delegate void SetCursorFunc(IntPtr handle);
 		public static readonly SetCursorFunc SetCursor;
+
+		public delegate IntPtr GetCursorFunc();
+		public static readonly GetCursorFunc GetCursor;
 
 		#endregion
 	}
